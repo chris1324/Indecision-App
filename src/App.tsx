@@ -5,11 +5,39 @@ import Header from './components/Header';
 import Options from './components/Options';
 import OptionModal from './components/OptionModal';
 
-export default class IndecisionApp extends React.Component {
+interface IState {
+    options: Array<string>;
+    selectedOption?: string;
+}
+
+export default class IndecisionApp extends React.Component<{}, IState> {
     state = {
-        options: [],
+        options: Array<string>(),
         selectedOption: undefined
     };
+
+    componentDidMount() {
+        try {
+            const optionsJson: string | null = localStorage.getItem('options');
+
+            if (optionsJson) {
+                const options = JSON.parse(optionsJson);
+
+                if (options) {
+                    this.setState(() => ({ options }));
+                }
+            }
+        } catch (e) {
+            // no-op
+        }
+    }
+
+    componentDidUpdate(prevProps: {}, prevState: IState) {
+        if (prevState.options.length !== this.state.options.length) {
+            const optionsJson = JSON.stringify(this.state.options);
+            localStorage.setItem('options', optionsJson);
+        }
+    }
 
     handleDeleteOptions = () => {
         this.setState(() => ({ options: [] }));
@@ -19,8 +47,8 @@ export default class IndecisionApp extends React.Component {
         this.setState(() => ({ selectedOption: undefined }));
     };
 
-    handleDeleteOption = (optionToRemove) => {
-        this.setState((prevState) => ({ options: prevState.options.filter(option => option !== optionToRemove) }));
+    handleDeleteOption = (optionToRemove: string) => {
+        this.setState(prevState => ({ options: prevState.options.filter(option => option !== optionToRemove) }));
     };
 
     handlePick = () => {
@@ -31,7 +59,7 @@ export default class IndecisionApp extends React.Component {
         this.setState(() => ({ selectedOption: option }))
     };
 
-    handleAddOption = (option) => {
+    handleAddOption = (option: string): string | undefined => {
         if (!option) {
             return 'Enter valid value to add item.'
         } else if (this.state.options.indexOf(option) > -1) {
@@ -41,27 +69,8 @@ export default class IndecisionApp extends React.Component {
         this.setState((prevState => ({ options: prevState.options.concat(option) })));
     }
 
-    componentDidMount() {
-        try {
-            const optionsJson = localStorage.getItem('options');
-            const options = JSON.parse(optionsJson);
-
-            if (options) {
-                this.setState(() => ({ options }));
-            }
-        } catch (e) {
-            // no-op
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.options.length !== this.state.options.length) {
-            const optionsJson = JSON.stringify(this.state.options);
-            localStorage.setItem('options', optionsJson);
-        }
-    }
-
     render() {
+        const { selectedOption } = this.state;
         const subtitle = 'Put your life in the hands of a computer';
 
         return (
@@ -84,10 +93,12 @@ export default class IndecisionApp extends React.Component {
                     </div>
 
                 </div>
+
                 <OptionModal
                     selectedOption={this.state.selectedOption}
                     handleClearSelectedOption={this.handleClearSelectedOption}
                 />
+
             </div>
         );
     }

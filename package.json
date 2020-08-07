@@ -8,6 +8,7 @@
     "dev-server": "webpack-dev-server"
   },
   "dependencies": {
+    "@types/react-modal": "^3.10.6",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
