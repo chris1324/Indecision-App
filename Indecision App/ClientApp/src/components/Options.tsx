@@ -1,10 +1,10 @@
 import React from 'react';
 // eslint-disable-next-line sort-imports
-import Option from './Option';
+import Option, { OptionModel } from './Option';
 
 interface IProps {
-	options: Array<string>;
-	handleDeleteOption: (option: string) => void;
+	options: Array<OptionModel>;
+	handleDeleteOption: (optionId: number) => void;
 	handleDeleteOptions: () => void;
 }
 
@@ -28,7 +28,7 @@ const Options: React.FC<IProps> = ({ options, handleDeleteOption, handleDeleteOp
 					key={index}
 					count={index + 1}
 					handleDeleteOption={handleDeleteOption}
-					optionText={x}
+					option={x}
 				/>
 			))}
 		</div>

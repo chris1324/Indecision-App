@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface IProps {
 	handleAddOption: (option: string) => string | null;
@@ -17,7 +17,7 @@ export default class AddOption extends React.Component<IProps, IState> {
 		};
 	}
 
-	handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+	handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 
 		const optionInputElement = e.target.elements.namedItem('option');
@@ -34,7 +34,7 @@ export default class AddOption extends React.Component<IProps, IState> {
 		}
 	};
 
-	render() {
+	render(): ReactNode {
 		const { error } = this.state;
 
 		return (

@@ -1,18 +1,23 @@
 import React from 'react';
 
-interface IProps {
-	count: number;
-	optionText: string;
-	handleDeleteOption: (optionText: string) => void;
+export interface OptionModel {
+	optionId: number,
+	name: string
 }
 
-const Option: React.FC<IProps> = ({ count, optionText, handleDeleteOption }) => (
+interface IProps {
+	count: number;
+	option: OptionModel;
+	handleDeleteOption: (optionId: number) => void;
+}
+
+const Option: React.FC<IProps> = ({ count, option, handleDeleteOption }) => (
 	<div className="option">
-		<p className="option__text">{`${count}. ${optionText}`}</p>
+		<p className="option__text">{`${count}. ${option.name}`}</p>
 		<button
 			className="button button--link"
 			type="button"
-			onClick={() => handleDeleteOption(optionText)}
+			onClick={() => handleDeleteOption(option.optionId)}
 		>
 			Remove
 		</button>
