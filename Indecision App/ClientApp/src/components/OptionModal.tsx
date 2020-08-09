@@ -1,9 +1,10 @@
 import React from 'react';
 // eslint-disable-next-line sort-imports
 import Modal from 'react-modal';
+import { OptionModel } from './Option';
 
 interface IProps {
-	selectedOption?: string;
+	selectedOption?: OptionModel;
 	handleClearSelectedOption: () => void;
 }
 
