@@ -12,7 +12,7 @@ namespace Indecision_App.Controllers
         {
             var random = new Random();
 
-            return new { result = $"Api success : {random.Next(1, 100)}" };
+            return new { result = $"Test Api success : {random.Next(1, 100)}" };
         }
     }
 }
