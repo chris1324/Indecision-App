@@ -1,0 +1,82 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:import/typescript"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "arrow-parens": [
+            "warn",
+            "as-needed"
+        ],
+        "comma-dangle": [
+            "warn",
+            "never"
+        ],
+        "eol-last": [
+            "off"
+        ],
+        "import/extensions": [
+            "off",
+            {
+                "tsx": "never"
+            }
+        ],
+        "indent": [
+            "off",
+            "tab"
+        ],
+        "linebreak-style": [
+            "off",
+            "windows"
+        ],
+        "no-tabs": [
+            "off"
+        ],
+        "react/jsx-filename-extension": [
+            "off"
+        ],
+        "react/jsx-indent": [
+            "warn",
+            "tab"
+        ],
+        "react/jsx-indent-props": [
+            "warn",
+            "tab"
+        ],
+        "react/jsx-sort-props": [
+            "warn",
+            {
+                "callbacksLast": true,
+                "shorthandFirst": true,
+                "shorthandLast": false,
+                "ignoreCase": true,
+                "noSortAlphabetically": false,
+                "reservedFirst": true
+            }
+        ],
+        "react/no-array-index-key": [
+            0
+        ],
+        "react/prop-types": [
+            "off"
+        ],
+        "sort-imports": "warn"
+    }
+}
