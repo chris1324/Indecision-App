@@ -9,6 +9,7 @@ import Options from './components/Options';
 interface IState {
 	options: Array<string>;
 	selectedOption?: string;
+	testApiData?: string;
 }
 
 export default class IndecisionApp extends React.Component<{}, IState> {
@@ -17,7 +18,8 @@ export default class IndecisionApp extends React.Component<{}, IState> {
 
 		this.state = {
 			options: [],
-			selectedOption: undefined
+			selectedOption: undefined,
+			testApiData: undefined
 		};
 	}
 
@@ -35,6 +37,8 @@ export default class IndecisionApp extends React.Component<{}, IState> {
 		} catch (e) {
 			// no-op
 		}
+
+		this.testWebApi();
 	}
 
 	componentDidUpdate(prevProps: {}, prevState: IState) {
@@ -43,6 +47,15 @@ export default class IndecisionApp extends React.Component<{}, IState> {
 		if (prevState.options.length !== options.length) {
 			const optionsJson = JSON.stringify(options);
 			localStorage.setItem('options', optionsJson);
+		}
+	}
+
+	testWebApi = async () => {
+		const response = await fetch('test');
+		const data = await response.json();
+
+		if (response) {
+			this.setState(() => ({ testApiData: data.result }));
 		}
 	}
 
@@ -86,12 +99,15 @@ export default class IndecisionApp extends React.Component<{}, IState> {
 	}
 
 	render() {
-		const { options, selectedOption } = this.state;
+		const { options, selectedOption, testApiData } = this.state;
 		const subtitle = 'Put your life in the hands of a computer';
 
 		return (
 			<div>
-				<Header subtitle={subtitle} />
+				<Header
+					subtitle={subtitle}
+					title={testApiData}
+				/>
 				<div className="container">
 					<Action
 						handlePick={this.handlePick}
