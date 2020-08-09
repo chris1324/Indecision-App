@@ -1,42 +1,59 @@
 import React from 'react';
 
 interface IProps {
-    handleAddOption: (option: string) => string | undefined;
+	handleAddOption: (option: string) => string | null;
 }
 
 interface IState {
-    error?: string
+	error: string | null
 }
 
 export default class AddOption extends React.Component<IProps, IState> {
-    state = {
-        error: undefined
-    }
+	constructor(props: IProps) {
+		super(props);
 
-    handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault();
+		this.state = {
+			error: null
+		};
+	}
 
-        const optionInputElement = e.target.elements.namedItem('option');
+	handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-        if (optionInputElement instanceof HTMLInputElement) {
-            const option = optionInputElement.value.trim();
-            const error = this.props.handleAddOption(option);
+		const optionInputElement = e.target.elements.namedItem('option');
 
-            this.setState(() => ({ error }));
+		if (optionInputElement instanceof HTMLInputElement) {
+			const { handleAddOption } = this.props;
 
-            if (!error) optionInputElement.value = '';
-        }
-    };
+			const option = optionInputElement.value.trim();
+			const error = handleAddOption(option);
 
-    render() {
-        return (
-            <div>
-                {this.state.error && <p className="add-option-error">{this.state.error}</p>}
-                <form className="add-option" onSubmit={this.handleFormSubmit}>
-                    <input className="add-option__input" type="text" name="option" />
-                    <button className="button">Add Option</button>
-                </form>
-            </div>
-        );
-    }
+			this.setState(() => ({ error }));
+
+			if (!error) optionInputElement.value = '';
+		}
+	};
+
+	render() {
+		const { error } = this.state;
+
+		return (
+			<div>
+				{error && <p className="add-option-error">{error}</p>}
+				<form className="add-option" onSubmit={this.handleFormSubmit}>
+					<input
+						className="add-option__input"
+						name="option"
+						type="text"
+					/>
+					<button
+						className="button"
+						type="submit"
+					>
+						Add Option
+					</button>
+				</form>
+			</div>
+		);
+	}
 }

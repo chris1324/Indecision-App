@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// eslint-disable-next-line sort-imports
+import 'normalize.css/normalize.css';
+import './styles/styles.scss';
 import App from './App';
-import 'normalize.css/normalize.css'
-import './styles/styles.scss'
 
 ReactDOM.render(<App />, document.getElementById('app'));

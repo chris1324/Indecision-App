@@ -1,105 +1,118 @@
 import React from 'react';
+// eslint-disable-next-line sort-imports
 import Action from './components/Action';
 import AddOption from './components/AddOption';
 import Header from './components/Header';
-import Options from './components/Options';
 import OptionModal from './components/OptionModal';
+import Options from './components/Options';
 
 interface IState {
-    options: Array<string>;
-    selectedOption?: string;
+	options: Array<string>;
+	selectedOption?: string;
 }
 
 export default class IndecisionApp extends React.Component<{}, IState> {
-    state = {
-        options: Array<string>(),
-        selectedOption: undefined
-    };
+	constructor(props: any) {
+		super(props);
 
-    componentDidMount() {
-        try {
-            const optionsJson: string | null = localStorage.getItem('options');
+		this.state = {
+			options: [],
+			selectedOption: undefined
+		};
+	}
 
-            if (optionsJson) {
-                const options = JSON.parse(optionsJson);
+	componentDidMount() {
+		try {
+			const optionsJson: string | null = localStorage.getItem('options');
 
-                if (options) {
-                    this.setState(() => ({ options }));
-                }
-            }
-        } catch (e) {
-            // no-op
-        }
-    }
+			if (optionsJson) {
+				const options = JSON.parse(optionsJson);
 
-    componentDidUpdate(prevProps: {}, prevState: IState) {
-        if (prevState.options.length !== this.state.options.length) {
-            const optionsJson = JSON.stringify(this.state.options);
-            localStorage.setItem('options', optionsJson);
-        }
-    }
+				if (options) {
+					this.setState(() => ({ options }));
+				}
+			}
+		} catch (e) {
+			// no-op
+		}
+	}
 
-    handleDeleteOptions = () => {
-        this.setState(() => ({ options: [] }));
-    };
+	componentDidUpdate(prevProps: {}, prevState: IState) {
+		const { options } = this.state;
 
-    handleClearSelectedOption = () => {
-        this.setState(() => ({ selectedOption: undefined }));
-    };
+		if (prevState.options.length !== options.length) {
+			const optionsJson = JSON.stringify(options);
+			localStorage.setItem('options', optionsJson);
+		}
+	}
 
-    handleDeleteOption = (optionToRemove: string) => {
-        this.setState(prevState => ({ options: prevState.options.filter(option => option !== optionToRemove) }));
-    };
+	handleDeleteOptions = () => {
+		this.setState(() => ({ options: [] }));
+	}
 
-    handlePick = () => {
-        const options = this.state.options;
-        const randomNumber = Math.floor(Math.random() * options.length);
-        const option = options[randomNumber];
+	handleClearSelectedOption = () => {
+		this.setState(() => ({ selectedOption: undefined }));
+	}
 
-        this.setState(() => ({ selectedOption: option }))
-    };
+	handleDeleteOption = (optionToRemove: string) => {
+		this.setState(prevState => (
+			{
+				options: prevState.options.filter(option => option !== optionToRemove)
+			}));
+	}
 
-    handleAddOption = (option: string): string | undefined => {
-        if (!option) {
-            return 'Enter valid value to add item.'
-        } else if (this.state.options.indexOf(option) > -1) {
-            return 'This option already exists.'
-        }
+	handlePick = () => {
+		const { options } = this.state;
+		const randomNumber = Math.floor(Math.random() * options.length);
+		const option = options[randomNumber];
 
-        this.setState((prevState => ({ options: prevState.options.concat(option) })));
-    }
+		this.setState(() => ({ selectedOption: option }));
+	}
 
-    render() {
-        const { selectedOption } = this.state;
-        const subtitle = 'Put your life in the hands of a computer';
+	handleAddOption = (option: string): string | null => {
+		const { options } = this.state;
 
-        return (
-            <div>
-                <Header subtitle={subtitle} />
-                <div className="container">
-                    <Action
-                        hasOptions={!!this.state.options.length}
-                        handlePick={this.handlePick}
-                    />
-                    <div className="widget">
-                        <Options
-                            options={this.state.options}
-                            handleDeleteOptions={this.handleDeleteOptions}
-                            handleDeleteOption={this.handleDeleteOption}
-                        />
-                        <AddOption
-                            handleAddOption={this.handleAddOption}
-                        />
-                    </div>
+		if (!option) {
+			return 'Enter valid value to add item.';
+		}
 
-                </div>
+		if (options.indexOf(option) > -1) {
+			return 'This option already exists.';
+		}
 
-                <OptionModal
-                    selectedOption={this.state.selectedOption}
-                    handleClearSelectedOption={this.handleClearSelectedOption}
-                />
+		this.setState((prevState => ({ options: prevState.options.concat(option) })));
 
-            </div>
-        );
-    }
+		return null;
+	}
+
+	render() {
+		const { options, selectedOption } = this.state;
+		const subtitle = 'Put your life in the hands of a computer';
+
+		return (
+			<div>
+				<Header subtitle={subtitle} />
+				<div className="container">
+					<Action
+						handlePick={this.handlePick}
+						hasOptions={!!options.length}
+					/>
+					<div className="widget">
+						<Options
+							handleDeleteOption={this.handleDeleteOption}
+							handleDeleteOptions={this.handleDeleteOptions}
+							options={options}
+						/>
+						<AddOption
+							handleAddOption={this.handleAddOption}
+						/>
+					</div>
+				</div>
+				<OptionModal
+					handleClearSelectedOption={this.handleClearSelectedOption}
+					selectedOption={selectedOption}
+				/>
+			</div>
+		);
+	}
 }

@@ -1,22 +1,33 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
+// eslint-disable-next-line sort-imports
 import Modal from 'react-modal';
 
 interface IProps {
-    selectedOption?: string;
-    handleClearSelectedOption: () => void;
+	selectedOption?: string;
+	handleClearSelectedOption: () => void;
 }
 
-const OptionModal: FunctionComponent<IProps> = ({ selectedOption, handleClearSelectedOption }) => (
-    <Modal
-        isOpen={!!selectedOption}
-        onRequestClose={handleClearSelectedOption}
-        closeTimeoutMS={200}
-        className="modal"
-    >
-        <h3 className="modal__title">Selected Option</h3>
-        <p className="modal__body"> {selectedOption}</p>
-        <button className="button" onClick={handleClearSelectedOption}>Okay</button>
-    </Modal>
+const OptionModal: React.FC<IProps> = ({ selectedOption, handleClearSelectedOption }) => (
+	<Modal
+		className="modal"
+		closeTimeoutMS={200}
+		isOpen={!!selectedOption}
+		onRequestClose={handleClearSelectedOption}
+	>
+		<h3 className="modal__title">Selected Option</h3>
+		<p
+			className="modal__body"
+		>
+			{selectedOption}
+		</p>
+		<button
+			className="button"
+			type="button"
+			onClick={handleClearSelectedOption}
+		>
+			Okay
+		</button>
+	</Modal>
 );
 
 export default OptionModal;
