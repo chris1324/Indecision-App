@@ -7,6 +7,12 @@ namespace Indecision_App.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
+        private readonly AppDbContent _context;
+        public TestController(AppDbContent context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public object Get()
         {
