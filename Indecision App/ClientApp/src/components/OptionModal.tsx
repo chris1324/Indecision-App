@@ -19,7 +19,7 @@ const OptionModal: React.FC<IProps> = ({ selectedOption, handleClearSelectedOpti
 		<p
 			className="modal__body"
 		>
-			{selectedOption}
+			{selectedOption?.name}
 		</p>
 		<button
 			className="button"
