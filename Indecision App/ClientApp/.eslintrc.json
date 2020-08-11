@@ -31,9 +31,8 @@
             "warn",
             "never"
         ],
-        "eol-last": [
-            "off"
-        ],
+        "eol-last": "off",
+        "import/order": "off",
         "import/extensions": [
             "off",
             {

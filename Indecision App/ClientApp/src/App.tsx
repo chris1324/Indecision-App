@@ -1,7 +1,10 @@
 import React, { ReactNode } from 'react';
 // eslint-disable-next-line sort-imports
+import 'devextreme/dist/css/dx.common.css';
+import 'devextreme/dist/css/dx.light.css';
 import Action from './components/Action';
 import AddOption from './components/AddOption';
+import { Button } from 'devextreme-react';
 import Header from './components/Header';
 import OptionModal from './components/OptionModal';
 import { OptionModel } from './components/Option';
@@ -88,6 +91,7 @@ export default class IndecisionApp extends React.Component<unknown, IState> {
 			<div>
 				<Header subtitle={subtitle} />
 				<div className="container">
+					<Button text="This is DexExtreme Button!!" />
 					<Action
 						handlePick={this.handlePick}
 						hasOptions={!!options.length}
