@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/react-modal": "^3.10.6",
+    "bootstrap": "^4.5.2",
     "devextreme": "20.1",
     "devextreme-react": "20.1",
     "normalize.css": "^8.0.1",

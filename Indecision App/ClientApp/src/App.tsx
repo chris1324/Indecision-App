@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 // eslint-disable-next-line sort-imports
-import 'devextreme/dist/css/dx.common.css';
-import 'devextreme/dist/css/dx.light.css';
 import Action from './components/Action';
 import AddOption from './components/AddOption';
 import { Button } from 'devextreme-react';
@@ -91,7 +89,14 @@ export default class IndecisionApp extends React.Component<unknown, IState> {
 			<div>
 				<Header subtitle={subtitle} />
 				<div className="container">
-					<Button text="This is DexExtreme Button!!" />
+					<div className="form-group flex-grow-1">
+						<Button
+							className="col-md-12"
+							disabled={!options.length}
+							text="This is DexExtreme Button with Boostrap styling!!"
+							onClick={this.handlePick}
+						/>
+					</div>
 					<Action
 						handlePick={this.handlePick}
 						hasOptions={!!options.length}

@@ -10,14 +10,15 @@ interface IProps {
 
 const OptionModal: React.FC<IProps> = ({ selectedOption, handleClearSelectedOption }) => (
 	<Modal
-		className="modal"
+		ariaHideApp={false}
+		className="option-modal"
 		closeTimeoutMS={200}
 		isOpen={!!selectedOption}
 		onRequestClose={handleClearSelectedOption}
 	>
-		<h3 className="modal__title">Selected Option</h3>
+		<h3 className="option-modal__title">Selected Option</h3>
 		<p
-			className="modal__body"
+			className="option-modal__body"
 		>
 			{selectedOption?.name}
 		</p>
