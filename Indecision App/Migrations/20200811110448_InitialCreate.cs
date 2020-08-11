@@ -2,7 +2,7 @@
 
 namespace Indecision_App.Migrations
 {
-    public partial class InitialSchema : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

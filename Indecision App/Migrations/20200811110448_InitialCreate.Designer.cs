@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Indecision_App.Migrations
 {
     [DbContext(typeof(AppDbContent))]
-    [Migration("20200809091452_InitialSchema")]
-    partial class InitialSchema
+    [Migration("20200811110448_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
