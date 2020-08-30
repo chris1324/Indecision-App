@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 // eslint-disable-next-line sort-imports
 import * as RouteUtils from 'utils/routeUtils';
 import { Link } from 'react-router-dom';
