@@ -1,7 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line sort-imports
-import Indecision from './scenes/Indecision';
+import Router from './layouts/Router';
 
-const App: React.FC = () => <Indecision />;
+const App: React.FC = () => <Router />;
 
 export default App;

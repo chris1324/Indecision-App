@@ -32,6 +32,7 @@
             "never"
         ],
         "eol-last": "off",
+        "import/no-unresolved": "off",
         "import/order": "off",
         "import/extensions": [
             "off",
@@ -43,13 +44,17 @@
             "off",
             "tab"
         ],
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
         "linebreak-style": [
             "off",
             "windows"
         ],
+        "max-len": "off",
         "no-tabs": [
             "off"
         ],
+        "object-curly-newline": "off",
         "react/jsx-filename-extension": [
             "off"
         ],
